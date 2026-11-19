@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dye a Delt Blue Tracker</title>
+<meta name="description" content="Delta Tau Delta Beta Pi's Dye a Delt Blue fundraiser for Breakthrough T1D.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* One blue world, matching the Dye a Delt Blue poster: electric blue ground, navy cards, yellow highlights. */
+:root{
+  --blue:#1F3BFF; --navy:#0B1640; --yellow:#FFD23F; --white:#ffffff;
+  --mist:rgba(255,255,255,0.72); --line:rgba(255,255,255,0.18);
+  --display:'Bricolage Grotesque', 'Arial Black', sans-serif;
+  --body:Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--blue);color:var(--white);font-family:var(--body);}
+body{min-height:100%;}
+.wrap{max-width:880px;margin:0 auto;padding:40px 20px 56px;display:flex;flex-direction:column;gap:28px;}
+.eyebrow{margin:0;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);}
+h1{margin:6px 0 0;font-family:var(--display);font-weight:800;font-size:clamp(48px,11vw,96px);line-height:.9;letter-spacing:-.03em;text-wrap:balance;}
+.tiers{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.tier{display:flex;align-items:baseline;gap:8px;background:var(--white);color:var(--navy);border-radius:999px;padding:8px 16px;font-weight:600;font-size:15px;}
+.tier b{font-family:var(--display);font-size:20px;font-weight:800;}
+.card{background:var(--navy);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:18px;}
+.total-row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;}
+.big{font-family:var(--display);font-weight:800;font-size:clamp(40px,9vw,64px);line-height:1;font-variant-numeric:tabular-nums;}
+.of{color:var(--mist);font-size:16px;font-weight:500;}
+.bar{height:22px;border-radius:11px;background:var(--line);overflow:hidden;}
+.bar > span{display:block;height:100%;background:var(--yellow);border-radius:11px;}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+.stat{border:1px solid var(--line);border-radius:16px;padding:14px;}
+.stat b{display:block;font-family:var(--display);font-size:32px;font-weight:800;font-variant-numeric:tabular-nums;}
+.stat span{font-size:13px;color:var(--mist);}
+h2{margin:0;font-family:var(--display);font-size:28px;font-weight:800;}
+.board{display:flex;flex-direction:column;gap:10px;}
+.row{background:var(--white);color:var(--navy);border-radius:18px;padding:14px 16px;display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:6px 12px;align-items:center;}
+.rank{font-family:var(--display);font-weight:800;font-size:20px;color:#5a6690;text-align:center;}
+.name{font-weight:700;font-size:17px;overflow-wrap:anywhere;}
+.amt{font-family:var(--display);font-weight:800;font-size:22px;font-variant-numeric:tabular-nums;text-align:right;}
+.track{grid-column:2 / 4;display:flex;align-items:center;gap:10px;}
+.mini{position:relative;flex:1;height:10px;border-radius:5px;background:#e3e7f3;}
+.mini > span{position:absolute;left:0;top:0;bottom:0;border-radius:5px;background:var(--blue);}
+.mini.short{flex:0 1 30%;min-width:56px;}
+.track .pill{margin-left:auto;}
+.mini > i{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--navy);left:25%;}
+.pill{font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;white-space:nowrap;}
+.p0{background:#e3e7f3;color:#3b4a7a;}
+.p1{background:var(--blue);color:var(--white);}
+.p2{background:var(--yellow);color:var(--navy);}
+.brow{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--blue);vertical-align:middle;}
+.chk{flex-direction:row;align-items:center;gap:6px;font-size:13px;}
+.chk input{width:20px;height:20px;padding:0;}
+.next{grid-column:2 / 4;font-size:13px;color:#4a5680;}
+.empty{background:var(--navy);border-radius:18px;padding:24px;color:var(--mist);text-align:center;}
+.info{display:flex;flex-wrap:wrap;gap:12px 28px;border-top:1px solid var(--line);padding-top:20px;font-size:15px;}
+.info b{color:var(--yellow);}
+.venmo{font-family:var(--display);font-weight:800;font-size:28px;color:var(--yellow);}
+.updated{font-size:13px;color:var(--mist);}
+@media (max-width:520px){.stats{grid-template-columns:1fr 1fr 1fr;}.stat b{font-size:24px;}}
+@media (prefers-reduced-motion:no-preference){.bar > span,.mini > span{transition:width .4s ease;}}
+</style>
+</head>
+<body>
+<main class="wrap" id="root"><p class="empty">Loading the leaderboard…</p></main>
+<script>
+(function(){
+  var root=document.getElementById('root');
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function money(n){n=Number(n)||0;return '$'+(Math.round(n*100)/100).toLocaleString('en-US',{maximumFractionDigits:2});}
+  function tier(r,b){return (b&&r>=200)?2:(r>=50?1:0);}
+  var LABEL=['Not yet','Blue hair','Hair + eyebrows'];
+  function nextText(r,b){
+    if(b&&r>=200) return 'Maxed out: blue hair and eyebrows for a week';
+    if(b&&r>=50) return money(200-r)+' more until his eyebrows go blue too';
+    if(r>=50) return 'Goal hit: he goes blue for a week';
+    return money(50-r)+' more until he goes blue';
+  }
+
+  function viewHTML(s){
+    var total=s.delts.reduce(function(a,d){return a+(Number(d.raised)||0);},0);
+    var goal=Number(s.goal)||1250;
+    var pct=Math.min(100,goal?total/goal*100:0);
+    var blue=s.delts.filter(function(d){return d.raised>=50;}).length;
+    var brows=s.delts.filter(function(d){return d.eyebrows&&d.raised>=200;}).length;
+    var browsN=s.delts.filter(function(d){return d.eyebrows;}).length;
+    var list=s.delts.map(function(d,i){return {name:d.name,raised:Number(d.raised)||0,eyebrows:!!d.eyebrows,i:i};})
+      .sort(function(a,b){return b.raised-a.raised||a.i-b.i;});
+    var rows=list.length?list.map(function(d,k){
+      var t=tier(d.raised,d.eyebrows), cap=d.eyebrows?200:50, w=Math.min(100,d.raised/cap*100);
+      return '<div class="row"><div class="rank">'+(k+1)+'</div><div class="name">'+esc(d.name)+(d.eyebrows?' <span class="brow">eyebrows on the line</span>':'')+'</div>'+
+        '<div class="amt">'+money(d.raised)+'</div>'+
+        '<div class="track"><div class="mini'+(d.eyebrows?'':' short')+'" aria-hidden="true"><span style="width:'+w+'%"></span>'+(d.eyebrows?'<i></i>':'')+'</div>'+
+        '<span class="pill p'+t+'">'+LABEL[t]+'</span></div>'+
+        '<div class="next">'+esc(nextText(d.raised,d.eyebrows))+'</div></div>';
+    }).join(''):'<div class="empty">No Delts on the board yet. Check back soon.</div>';
+    var info=[];
+    if(s.venmo) info.push('<div><div class="updated">Donate on Venmo, his name in the note</div><div class="venmo">@'+esc(s.venmo.replace(/^@/,''))+'</div></div>');
+    if(s.closes) info.push('<div><div class="updated">Donations close</div><b>'+esc(s.closes)+'</b></div>');
+    if(s.location) info.push('<div><div class="updated">Dye day</div><b>'+esc(s.location)+'</b></div>');
+    return '<header><p class="eyebrow">Delta Tau Delta · Beta Pi × Breakthrough T1D</p>'+
+      '<h1>Dye a Delt Blue.</h1>'+
+      '<div class="tiers"><span class="tier"><b>$50</b> blue hair for a week</span><span class="tier"><b>$200</b> blue eyebrows too ('+browsN+' brave Delts)</span></div></header>'+
+      '<section class="card" aria-label="Chapter total"><div class="total-row"><div><div class="big">'+money(total)+'</div><div class="of">raised of '+money(goal)+' chapter goal</div></div>'+
+      '<div class="of">'+Math.round(pct)+'%</div></div>'+
+      '<div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="'+goal+'" aria-valuenow="'+total+'"><span style="width:'+pct+'%"></span></div>'+
+      '<div class="stats"><div class="stat"><b>'+blue+'</b><span>Delts gone blue</span></div><div class="stat"><b>'+brows+'</b><span>eyebrows too</span></div><div class="stat"><b>'+s.delts.length+'</b><span>Delts in</span></div></div></section>'+
+      '<section class="board" aria-label="Leaderboard"><h2>Leaderboard</h2>'+rows+'</section>'+
+      (info.length?'<section class="info">'+info.join('')+'</section>':'')+
+      (s.updated?'<p class="updated">Last updated '+esc(s.updated)+'</p>':'')+
+      '<p class="updated">Every dollar goes to Breakthrough T1D for type 1 diabetes research.</p>';
+  }
+
+  fetch('data.json?t='+Date.now(),{cache:'no-store'})
+    .then(function(r){if(!r.ok) throw new Error(r.status); return r.json();})
+    .then(function(s){root.innerHTML=viewHTML(s);})
+    .catch(function(){root.innerHTML='<p class="empty">The tracker could not load right now. Refresh the page in a minute.</p>';});
+})();
+</script>
+</body>
+</html>
