@@ -8,7 +8,7 @@
   "updated": "",
   "delts": [
     {"name": "Bryce Warner", "raised": 30, "eyebrows": true},
-    {"name": "Nash Philips", "raised": 0, "eyebrows": true},
+    {"name": "Nash Philips", "raised": 30, "eyebrows": true},
     {"name": "Owen Lee", "raised": 0, "eyebrows": true},
     {"name": "Micheal Fahrety", "raised": 0, "eyebrows": true},
     {"name": "Sirak Nephtalem", "raised": 0, "eyebrows": true},
@@ -36,6 +36,7 @@
     {"name": "Nick Heise", "raised": 0, "eyebrows": false},
     {"name": "Jack Gehring", "raised": 0, "eyebrows": false},
     {"name": "Marco Hartano", "raised": 0, "eyebrows": false},
-    {"name": "Joseph Woldemichael", "raised": 0, "eyebrows": false}
+    {"name": "Joseph Woldemichael", "raised": 0, "eyebrows": false},
+    {"name": "Darius Conconi", "raised": 0, "eyebrows": false}
   ]
 }
