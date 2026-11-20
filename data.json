@@ -7,7 +7,7 @@
   "location": "",
   "updated": "",
   "delts": [
-    {"name": "Bryce Warner", "raised": 0, "eyebrows": true},
+    {"name": "Bryce Warner", "raised": 30, "eyebrows": true},
     {"name": "Nash Philips", "raised": 0, "eyebrows": true},
     {"name": "Owen Lee", "raised": 0, "eyebrows": true},
     {"name": "Micheal Fahrety", "raised": 0, "eyebrows": true},
@@ -23,7 +23,7 @@
     {"name": "John-Henry Larson", "raised": 0, "eyebrows": false},
     {"name": "Nathan Riesenburger", "raised": 0, "eyebrows": false},
     {"name": "Conor Scheidt", "raised": 0, "eyebrows": false},
-    {"name": "Ben Doolittle", "raised": 0, "eyebrows": true},
+    {"name": "Ben Doolittle", "raised": 30, "eyebrows": true},
     {"name": "Elliot Yoder", "raised": 0, "eyebrows": false},
     {"name": "Kaden Ellini", "raised": 0, "eyebrows": true},
     {"name": "Noah Hirokawa", "raised": 0, "eyebrows": false},
