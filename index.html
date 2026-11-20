@@ -60,6 +60,7 @@ h2{margin:0;font-family:var(--display);font-size:28px;font-weight:800;}
 .empty{background:var(--navy);border-radius:18px;padding:24px;color:var(--mist);text-align:center;}
 .info{display:flex;flex-wrap:wrap;gap:12px 28px;border-top:1px solid var(--line);padding-top:20px;font-size:15px;}
 .info b{color:var(--yellow);}
+.venmo-top{margin-top:18px;}
 .venmo{font-family:var(--display);font-weight:800;font-size:28px;color:var(--yellow);}
 .updated{font-size:13px;color:var(--mist);}
 @media (max-width:520px){.stats{grid-template-columns:1fr 1fr 1fr;}.stat b{font-size:24px;}}
@@ -102,12 +103,12 @@ h2{margin:0;font-family:var(--display);font-size:28px;font-weight:800;}
         '<div class="next">'+esc(nextText(d.raised,d.eyebrows))+'</div></div>';
     }).join(''):'<div class="empty">No Delts on the board yet. Check back soon.</div>';
     var info=[];
-    if(s.venmo) info.push('<div><div class="updated">Donate on Venmo, his name in the note</div><div class="venmo">@'+esc(s.venmo.replace(/^@/,''))+'</div></div>');
+    var venmoTop=s.venmo?'<div class="venmo-top"><div class="updated">Donate on Venmo, his name in the note</div><div class="venmo">@'+esc(s.venmo.replace(/^@/,''))+'</div></div>':'';
     if(s.closes) info.push('<div><div class="updated">Donations close</div><b>'+esc(s.closes)+'</b></div>');
     if(s.location) info.push('<div><div class="updated">Dye day</div><b>'+esc(s.location)+'</b></div>');
     return '<header><p class="eyebrow">Delta Tau Delta · Beta Pi × Breakthrough T1D</p>'+
       '<h1>Dye a Delt Blue.</h1>'+
-      '<div class="tiers"><span class="tier"><b>'+money(HAIR)+'</b> blue hair for a week</span><span class="tier"><b>'+money(BROW)+'</b> blue eyebrows too ('+browsN+' brave Delts)</span></div></header>'+
+      '<div class="tiers"><span class="tier"><b>'+money(HAIR)+'</b> blue hair for a week</span><span class="tier"><b>'+money(BROW)+'</b> blue eyebrows too ('+browsN+' brave Delts)</span></div>'+venmoTop+'</header>'+
       '<section class="card" aria-label="Chapter total"><div class="total-row"><div><div class="big">'+money(total)+'</div><div class="of">raised of '+money(goal)+' chapter goal</div></div>'+
       '<div class="of">'+Math.round(pct)+'%</div></div>'+
       '<div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="'+goal+'" aria-valuenow="'+total+'"><span style="width:'+pct+'%"></span></div>'+
