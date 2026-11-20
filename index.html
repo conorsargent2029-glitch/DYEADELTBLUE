@@ -73,7 +73,7 @@ h2{margin:0;font-family:var(--display);font-size:28px;font-weight:800;}
   var root=document.getElementById('root');
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function money(n){n=Number(n)||0;return '$'+(Math.round(n*100)/100).toLocaleString('en-US',{maximumFractionDigits:2});}
-  var HAIR=30, BROW=150;
+  var HAIR=30, BROW=75;
   function tier(r,b){return (b&&r>=BROW)?2:(r>=HAIR?1:0);}
   var LABEL=['Not yet','Blue hair','Hair + eyebrows'];
   function nextText(r,b){
@@ -85,7 +85,7 @@ h2{margin:0;font-family:var(--display);font-size:28px;font-weight:800;}
 
   function viewHTML(s){
     var total=s.delts.reduce(function(a,d){return a+(Number(d.raised)||0);},0);
-    HAIR=Number(s.hairGoal)||30; BROW=Number(s.eyebrowGoal)||150;
+    HAIR=Number(s.hairGoal)||30; BROW=Number(s.eyebrowGoal)||75;
     var goal=Number(s.goal)||1000;
     var pct=Math.min(100,goal?total/goal*100:0);
     var blue=s.delts.filter(function(d){return d.raised>=HAIR;}).length;

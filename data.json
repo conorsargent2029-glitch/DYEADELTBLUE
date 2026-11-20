@@ -1,7 +1,7 @@
 {
   "goal": 1000,
   "hairGoal": 30,
-  "eyebrowGoal": 150,
+  "eyebrowGoal": 75,
   "venmo": "",
   "closes": "",
   "location": "",
@@ -37,6 +37,6 @@
     {"name": "Jack Gehring", "raised": 0, "eyebrows": false},
     {"name": "Marco Hartano", "raised": 0, "eyebrows": false},
     {"name": "Joseph Woldemichael", "raised": 0, "eyebrows": false},
-    {"name": "Darius Conconi", "raised": 0, "eyebrows": false}
+    {"name": "Darius Conconi", "raised": 0, "eyebrows": true}
   ]
 }
